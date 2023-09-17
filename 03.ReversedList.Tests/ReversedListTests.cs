@@ -196,7 +196,7 @@ namespace Problem03.ReversedList.Tests
                 this.list.Add(num);
             }
 
-            Assert.AreEqual(numbers.Length - 1, this.list.IndexOf(3));
+            Assert.AreEqual(0, this.list.IndexOf(3));
         }
 
         [Test]

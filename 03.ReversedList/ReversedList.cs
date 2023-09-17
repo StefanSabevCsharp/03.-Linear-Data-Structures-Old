@@ -71,22 +71,75 @@
 
         public int IndexOf(T item)
         {
-            throw new NotImplementedException();
+            for (int i = 0; i < this.Count; i++)
+            {
+                if (items[i].Equals(item))
+                {
+                    return i;
+                }
+            }
+            return -1;
         }
 
         public void Insert(int index, T item)
         {
-            throw new NotImplementedException();
+
+            if (CheckValidIndex(index))
+            {
+                for (int i = this.Count; i >= index; i--)
+                {
+                    items[i + 1] = items[i];
+                }
+                items[index] = item;
+                Count++;
+            }
+            else
+            {
+                throw new IndexOutOfRangeException();
+            }
+        }
+
+        private bool CheckValidIndex(int index)
+        {
+           if(index < 0 || index > this.Count)
+            {
+                throw new IndexOutOfRangeException();
+             
+            }
+           return true;
         }
 
         public bool Remove(T item)
         {
-            throw new NotImplementedException();
+           if(Contains(item))
+            {
+                for (int i = 0; i < this.Count; i++)
+                {
+                    if (items[i].Equals(item))
+                    {
+                        RemoveAt(i);
+                        return true;
+                    }
+                }
+            }
+            return false;
         }
 
         public void RemoveAt(int index)
         {
-            throw new NotImplementedException();
+
+            if(CheckValidIndex(index))
+            {
+                for (int i = index; i < this.Count - 1; i++)
+                {
+                    items[i] = items[i + 1];
+                }
+                Count--;
+            }
+            else
+            {
+                throw new IndexOutOfRangeException();
+            }
         }
 
         public IEnumerator<T> GetEnumerator()

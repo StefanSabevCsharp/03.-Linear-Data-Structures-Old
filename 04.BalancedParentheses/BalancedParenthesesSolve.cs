@@ -7,7 +7,40 @@
     {
         public bool AreBalanced(string parentheses)
         {
-            throw new NotImplementedException();
+            Queue<char> queue = new Queue<char>(parentheses);
+            Stack<char> stack = new Stack<char>();
+
+            while(queue.Count > 0)
+            {
+                char c = queue.Dequeue();
+                switch (c)
+                {
+                    case '(':
+                    case '[':
+                    case '{':
+                        stack.Push(c);
+                        break;
+                    case ')':
+                        if (stack.Count == 0 || stack.Pop() != '(')
+                        {
+                            return false;
+                        }
+                        break;
+                    case ']':
+                        if (stack.Count == 0 || stack.Pop() != '[')
+                        {
+                            return false;
+                        }
+                        break;
+                    case '}':
+                        if (stack.Count == 0 || stack.Pop() != '{')
+                        {
+                            return false;
+                        }
+                        break;
+                }
+            }
+            return true;
         }
     }
 }
